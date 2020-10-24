@@ -82,9 +82,12 @@ export default function Todo(props) {
     );
 
     useEffect(() => {
-        console.log("side effect");
-        // console.log("main render");
-    });
+        if (isEditing) {
+            editFieldRef.current.focus();
+        } else {
+            editButtonRef.current.focus();
+        }
+    }, [isEditing]);
 
     return (
         <li className="todo">{isEditing ? editingTemplate : viewTemplate}
