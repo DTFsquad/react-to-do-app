@@ -43,7 +43,7 @@ function App(props) {
       //if this task has the same ID as the edited task
       if (id === task.id) {
         //
-        return {...task, name: newName}
+        return { ...task, name: newName }
       }
       return task;
     });
@@ -62,6 +62,15 @@ function App(props) {
     />
   ));
 
+  const filterList = FILTER_NAMES.map(name => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
+  ));
+
   const tasksNoun = taskList.lenght !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
@@ -69,9 +78,7 @@ function App(props) {
     <div className="todoapp stack-large">
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
-        <FilterButton />
-        <FilterButton />
-        <FilterButton />
+        {filterList}
       </div>
       <h2 id="list-heading">{headingText}</h2>
       <ul
